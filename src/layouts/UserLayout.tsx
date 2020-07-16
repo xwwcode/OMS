@@ -55,14 +55,14 @@ const UserLayout: React.SFC<UserLayoutProps> = props => {
           {children}
         </div>
         <DefaultFooter
-          copyright="优托邦"
-          // links={[
-          //   {
-          //     key: 'index',
-          //     title: 'UTOPA',
-          //     href: 'https://www.myutopa.com/#/',
-          //   },
-          // ]}
+        // copyright="优托邦"
+        // links={[
+        //   {
+        //     key: 'index',
+        //     title: 'UTOPA',
+        //     href: 'https://www.myutopa.com/#/',
+        //   },
+        // ]}
         />
       </div>
     </>

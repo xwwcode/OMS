@@ -283,7 +283,7 @@ request.interceptors.response.use(async (response, options) => {
     handeErrorStatus(json.code, response, json.message);
   }
 
-  checkLoginOut(json.code);
+  // checkLoginOut(json.code);
 
   // 只暴露data参数，其它拦截器统一处理
   return error ? null : json || {};

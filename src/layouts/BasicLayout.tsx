@@ -128,17 +128,17 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
    * constructor
    */
   useEffect(() => {
-    if (dispatch) {
-      dispatch({
-        type: 'login/getUserMenus',
-        payload: storage.getItem(STORAGE_KEY.TOKEN).userId,
-      });
-      dispatch({ type: 'customer/customerList' });
-      dispatch({
-        type: 'permission/appLicationList',
-        payload: storage.getItem(STORAGE_KEY.USER).customerId,
-      });
-    }
+    // if (dispatch) {
+    //   dispatch({
+    //     type: 'login/getUserMenus',
+    //     payload: storage.getItem(STORAGE_KEY.TOKEN).userId,
+    //   });
+    //   dispatch({ type: 'customer/customerList' });
+    //   dispatch({
+    //     type: 'permission/appLicationList',
+    //     payload: storage.getItem(STORAGE_KEY.USER).customerId,
+    //   });
+    // }
   }, []);
   /**
    * init variables

@@ -152,11 +152,11 @@ const Model: LoginModelType = {
         });
       } else {
         message.error('系统未授权，请联系管理员');
-        yield put(
-          routerRedux.replace({
-            pathname: '/user/login',
-          }),
-        );
+        // yield put(
+        //   routerRedux.replace({
+        //     pathname: '/user/login',
+        //   }),
+        // );
       }
     },
   },

@@ -1,5 +1,6 @@
 import { Alert, Checkbox, Icon } from 'antd';
 import React, { Component } from 'react';
+import { routerRedux } from 'dva/router';
 import { CheckboxChangeEvent } from 'antd/es/checkbox';
 import { Dispatch, AnyAction } from 'redux';
 import { FormComponentProps } from 'antd/es/form';
@@ -39,30 +40,32 @@ class Login extends Component<LoginProps, LoginState> {
   };
 
   componentWillMount() {
-    const { dispatch } = this.props;
-    if (dispatch) {
-      dispatch({
-        type: 'login/getSessions',
-        payload: appKeys(),
-      });
-    }
+    // const { dispatch } = this.props;
+    // if (dispatch) {
+    //   dispatch({
+    //     type: 'login/getSessions',
+    //     payload: appKeys(),
+    //   });
+    // }
   }
 
   changeAutoLogin = (e: CheckboxChangeEvent) => {
-    this.setState({
-      autoLogin: e.target.checked,
-    });
+    // this.setState({
+    //   autoLogin: e.target.checked,
+    // });
   };
 
   handleSubmit = (err: unknown, values: LoginParamsType) => {
-    if (!err) {
-      const { dispatch, accessTocken, loginMsg } = this.props;
-      const { appKey, sessionKey } = accessTocken;
-      dispatch({
-        type: 'login/login',
-        payload: { ...values, appKey, sessionKey, loginType: 5 },
-      });
-    }
+    console.log('======err=======');
+    // window.g_app._store.dispatch(routerRedux.push('/user/login'));
+    // if (!err) {
+    //   const { dispatch, accessTocken, loginMsg } = this.props;
+    //   const { appKey, sessionKey } = accessTocken;
+    //   dispatch({
+    //     type: 'login/login',
+    //     payload: { ...values, appKey, sessionKey, loginType: 5 },
+    //   });
+    // }
   };
 
   onTabChange = (type: string) => {
@@ -144,13 +147,13 @@ class Login extends Component<LoginProps, LoginState> {
                   message: '请输入密码！',
                 },
               ]}
-              onPressEnter={e => {
-                e.preventDefault();
+              // onPressEnter={e => {
+              //   e.preventDefault();
 
-                if (this.loginForm) {
-                  this.loginForm.validateFields(this.handleSubmit);
-                }
-              }}
+              //   if (this.loginForm) {
+              //     this.loginForm.validateFields(this.handleSubmit);
+              //   }
+              // }}
             />
           </Tab>
           <div>
