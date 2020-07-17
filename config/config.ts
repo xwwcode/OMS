@@ -1,5 +1,6 @@
 import { IConfig, IPlugin } from 'umi-types';
 import defaultSettings from './defaultSettings'; // https://umijs.org/config/
+
 import slash from 'slash2';
 import themePluginConfig from './themePluginConfig';
 const { pwa } = defaultSettings; // preview.pro.ant.design only do not use in your production ;
@@ -7,7 +8,6 @@ const { pwa } = defaultSettings; // preview.pro.ant.design only do not use in yo
 
 const { ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION } = process.env;
 const isAntDesignProPreview = ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION === 'site';
-
 const plugins: IPlugin[] = [
   [
     'umi-plugin-react',
@@ -55,7 +55,6 @@ const plugins: IPlugin[] = [
     },
   ],
 ];
-
 export default {
   plugins,
   history: 'hash',
@@ -95,55 +94,61 @@ export default {
           routes: [
             {
               path: '/',
-              redirect: '/customer/page',
+              redirect: '/goods',
             },
+            // {
+            //   name: '客户管理',
+            //   icon: 'switcher',
+            //   path: '/customer/page',
+            //   component: './customer/Page',
+            // },
+            // {
+            //   name: '应用管理',
+            //   icon: 'switcher',
+            //   path: '/application/page',
+            //   component: './application/Page',
+            // },
+            // {
+            //   name: '用户管理',
+            //   icon: 'switcher',
+            //   path: '/theuser/page',
+            //   component: './theUser/Page',
+            // },
+            // {
+            //   name: '子用户管理',
+            //   icon: 'switcher',
+            //   path: '/childtheuser/page',
+            //   component: './childTheUser/Page',
+            // },
+            // {
+            //   name: '角色管理',
+            //   icon: 'switcher',
+            //   path: '/role/page',
+            //   component: './role/Page',
+            // },
+            // {
+            //   name: '子角色管理',
+            //   icon: 'switcher',
+            //   path: '/childrole',
+            //   component: './childRole',
+            // },
+            // {
+            //   name: '权限管理',
+            //   icon: 'switcher',
+            //   path: '/permission/page',
+            //   component: './permission/Page',
+            // },
+            // {
+            //   name: '菜单管理',
+            //   icon: 'switcher',
+            //   path: '/menu',
+            //   component: './menu',
+            // },
             {
-              name: '客户管理',
+              name: '货品信息',
               icon: 'switcher',
-              path: '/customer/page',
-              component: './customer/Page',
-            },
-            {
-              name: '应用管理',
-              icon: 'switcher',
-              path: '/application/page',
-              component: './application/Page',
-            },
-            {
-              name: '用户管理',
-              icon: 'switcher',
-              path: '/theuser/page',
-              component: './theUser/Page',
-            },
-            {
-              name: '子用户管理',
-              icon: 'switcher',
-              path: '/childtheuser/page',
-              component: './childTheUser/Page',
-            },
-            {
-              name: '角色管理',
-              icon: 'switcher',
-              path: '/role/page',
-              component: './role/Page',
-            },
-            {
-              name: '子角色管理',
-              icon: 'switcher',
-              path: '/childrole',
-              component: './childRole',
-            },
-            {
-              name: '权限管理',
-              icon: 'switcher',
-              path: '/permission/page',
-              component: './permission/Page',
-            },
-            {
-              name: '菜单管理',
-              icon: 'switcher',
-              path: '/menu',
-              component: './menu',
+              path: '/goods',
+              component: './goods',
             },
             {
               component: './404',

@@ -219,7 +219,7 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
         );
       }}
       footerRender={false}
-      menuDataRender={menuDataRender}
+      // menuDataRender={menuDataRender}
       rightContentRender={rightProps => <RightContent {...rightProps} />}
       {...props}
       {...settings}
