@@ -21,21 +21,22 @@ export const Helper = {
     return sortParam;
   },
   deepSort(params) {
+    const isParam = params;
     // eslint-disable-next-line no-restricted-syntax
-    for (const k in params) {
-      if (this.isArray(params[k])) {
+    for (const k in isParam) {
+      if (this.isArray(isParam[k])) {
         // 数组
         // eslint-disable-next-line no-plusplus
-        for (let i = 0; i < params[k].length; i++) {
-          if (this.isObject(params[k][i])) {
-            params[k][i] = this.deepSort(params[k][i]);
+        for (let i = 0; i < isParam[k].length; i++) {
+          if (this.isObject(isParam[k][i])) {
+            isParam[k][i] = this.deepSort(isParam[k][i]);
           }
         }
-      } else if (this.isObject(params[k])) {
+      } else if (this.isObject(isParam[k])) {
         // JSON
-        params[k] = this.deepSort(params[k]);
+        isParam[k] = this.deepSort(isParam[k]);
       }
     }
-    return this.sort(params);
+    return this.sort(isParam);
   },
 };

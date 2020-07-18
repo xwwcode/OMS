@@ -1,11 +1,12 @@
-import React from 'react';
-import { Button } from 'antd';
+import React, { useState } from 'react';
+import { Button, Modal } from 'antd';
 import { connect } from 'dva';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import { SearchForm, StandardTable, useConnectTable, visibleFormModal } from 'utopa-antd-pro';
 import { ConnectProps } from '@/models/connect';
 import { ISearchData, ConnectPageState } from './model';
 import { searchSchema, editSchema } from './schema';
+import ImportModel from './importModel';
 
 const ACTIONS = {
   FETCH_LIST: 'goods/fetchList',
@@ -35,7 +36,7 @@ const columns = [
   },
   {
     title: '品牌',
-    dataIndex: 'card',
+    dataIndex: 'brand',
     // width: 130,
   },
   {
@@ -60,20 +61,30 @@ const Goods: React.FC<IProps> = ({ dataScouce, loading, dispatch = () => {}, sea
     actionType: ACTIONS.FETCH_LIST,
   });
 
+  const [buttonShow, setButtonShow] = useState(false);
+  const [commitData, setCommitData] = useState({});
+  const [importModelFalg, setImportModelFalg] = useState(false);
   /**
    * 新增
    */
   const onAdd = () => {
     visibleFormModal(editSchema(), {
       title: '新增',
-      onOk: async (data: any) => {
-        await dispatch({
-          type: ACTIONS.ADD_ITEM,
-          payload: data,
-        });
-        onAutoSearch();
+      width: 1000,
+      onOk: (data: any) => {
+        setCommitData(data);
+        setButtonShow(true);
       },
     });
+  };
+
+  const addSubmit = () => {
+    setButtonShow(false);
+    dispatch({
+      type: ACTIONS.ADD_ITEM,
+      payload: commitData,
+    });
+    onAutoSearch();
   };
 
   /**
@@ -82,6 +93,7 @@ const Goods: React.FC<IProps> = ({ dataScouce, loading, dispatch = () => {}, sea
   const onUpdate = (item: any) => {
     visibleFormModal(editSchema(item), {
       title: '修改',
+      width: 1000,
       onOk: async (data: any) => {
         await dispatch({
           type: ACTIONS.UPDATE_ITEM,
@@ -98,22 +110,16 @@ const Goods: React.FC<IProps> = ({ dataScouce, loading, dispatch = () => {}, sea
   const colActions = React.useCallback(
     record => [
       { name: '修改', onHandler: onUpdate },
+      // {
+      //   name: '删除',
+      //   onHandler: async (item: any) => {
+      //     await dispatch({ type: ACTIONS.DELETE_ITEM, payload: item.id });
+      //     onAutoSearch();
+      //   },
+      // },
       {
-        name: '删除',
-        onHandler: async (item: any) => {
-          await dispatch({ type: ACTIONS.DELETE_ITEM, payload: item.id });
-          onAutoSearch();
-        },
-      },
-      {
-        name: record.enabled ? '禁用' : '启用',
-        onHandler: async (item: any) => {
-          await dispatch({
-            type: ACTIONS.SWITCH_STATUS,
-            payload: { id: item.id, enabled: item.enabled },
-          });
-          onAutoSearch();
-        },
+        name: '复制',
+        onHandler: () => {},
       },
     ],
     [onAutoSearch],
@@ -121,13 +127,47 @@ const Goods: React.FC<IProps> = ({ dataScouce, loading, dispatch = () => {}, sea
 
   return (
     <PageHeaderWrapper title={false}>
+      {buttonShow && (
+        <Modal
+          title="提交"
+          visible={buttonShow}
+          centered
+          onOk={addSubmit}
+          onCancel={() => setButtonShow(false)}
+          okText="确认并复制"
+          cancelText="确认"
+        >
+          <p>确定提交货品信息？</p>
+        </Modal>
+      )}
+      {importModelFalg && (
+        <ImportModel
+          disables={importModelFalg}
+          closeModal={(falg: any) => {
+            setImportModelFalg(falg);
+          }}
+        />
+      )}
       <StandardTable
         actions={
-          <Button.Group size="small">
-            <Button type="primary" onClick={onAdd}>
-              新增
-            </Button>
-          </Button.Group>
+          <div>
+            <Button.Group size="small">
+              <Button type="primary" onClick={onAdd}>
+                新增
+              </Button>
+            </Button.Group>
+            &nbsp;&nbsp;
+            <Button.Group size="small">
+              <Button
+                type="primary"
+                onClick={() => {
+                  setImportModelFalg(true);
+                }}
+              >
+                导入
+              </Button>
+            </Button.Group>
+          </div>
         }
         searchContent={<SearchForm onSearch={onAutoSearch} formSchema={searchSchema} />}
         columns={columns}

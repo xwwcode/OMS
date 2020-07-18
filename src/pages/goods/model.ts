@@ -47,14 +47,45 @@ const Model: ModelType = {
 
   state: {
     searchData: {},
-    list: [],
+    list: [
+      {
+        id: 1,
+        name: '商品一',
+        brand: '美特斯班委',
+        loaction: '广州',
+        creationTime: '2020:08:07',
+        stock: 999,
+      },
+    ],
     details: {},
   },
 
   effects: {
     *fetchList({ payload }, { call, put }) {
       const res = yield call(goodsApi.index, payload);
-      yield put({ type: 'saveList', payload: res && Array.isArray(res.data) ? res.data : [] });
+      yield put({
+        type: 'saveList',
+        payload:
+          res && Array.isArray(res.data)
+            ? res.data
+            : [
+                {
+                  id: 1,
+                  name: '商品一',
+                  brand: '美特斯班委',
+                  loaction: '广州',
+                  creationTime: '2020:08:07',
+                  stock: 999,
+                  skuList: [
+                    {
+                      skuCode: '0000000',
+                      skuName: '000000000',
+                      skuBarCode: '0000000',
+                    },
+                  ],
+                },
+              ],
+      });
       return res;
     },
 
@@ -89,10 +120,12 @@ const Model: ModelType = {
   },
   reducers: {
     saveList(state, { payload }) {
-      state.list = payload;
+      const setState = state;
+      setState.list = payload;
     },
     saveItem(state, { payload }) {
-      state.details = payload;
+      const setState = state;
+      setState.details = payload;
     },
   },
 };
