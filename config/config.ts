@@ -95,8 +95,7 @@ export default {
             {
               path: '/',
               redirect: '/goods',
-            },
-            // {
+            }, // {
             //   name: '客户管理',
             //   icon: 'switcher',
             //   path: '/customer/page',
@@ -150,6 +149,61 @@ export default {
               path: '/goods',
               component: './goods',
             },
+            {
+              name: '品牌信息',
+              icon: 'switcher',
+              path: '/brands',
+              component: './brands',
+            },
+            {
+              name: '店铺信息',
+              icon: 'switcher',
+              path: '/store',
+              component: './store',
+            },
+            {
+              name: '供应商信息',
+              icon: 'switcher',
+              path: '/supplier',
+              component: './supplier',
+            },
+            {
+              name: '仓库信息',
+              icon: 'switcher',
+              path: '/warehouse',
+              component: './warehouse',
+            },
+            {
+              name: '到货通知单',
+              icon: 'switcher',
+              path: '/notice',
+              component: './notice',
+            },
+            // {
+            //   name: '到货通知单详情',
+            //   path: '/notice/detail',
+            //   component: './notice/detail',
+            //   hideChildrenInMenu: true
+            // },
+            {
+              name: '退供出库单',
+              icon: 'switcher',
+              path: '/delyvery',
+              component: './delyvery',
+            }, // {
+            //   name: '基础资料',
+            //   icon: 'switcher',
+            //   routes: [
+            //   ],
+            // },
+            // {
+            //   name: '库存管理',
+            //   icon: 'switcher',
+            // },
+            // {
+            //   name: '订单管理',
+            //   icon: 'switcher',
+            // },
             {
               component: './404',
             },

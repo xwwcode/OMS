@@ -276,7 +276,15 @@ export const editSchema = (item: any = {}): IFormSchema[] => [
       md: 20,
     },
     component: <SkuMessage />,
-    options: { initialValue: item.skuList || '' },
+    options: {
+      initialValue: item.skuList || [
+        {
+          skuCode: '',
+          skuName: '',
+          skuBarCode: '',
+        },
+      ],
+    },
     rules: [{ required: false }],
   },
   {
