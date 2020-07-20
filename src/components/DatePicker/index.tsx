@@ -6,21 +6,31 @@ import { selectfilterOption } from '@/utils/utils';
 import storage from '@/utils/storage';
 import { STORAGE_KEY } from '@/common/storage';
 
-interface IProps extends ConnectProps {}
+interface IProps extends ConnectProps {
+  onChange: (val: any) => void;
+}
 /**
- * 用于应用列表的下拉列表
+ * 选择时间框
  */
 class DatePicke extends React.PureComponent<IProps> {
-  onChange = (val: any) => {
-    console.log(val, '000000000');
-  };
+  componentDidMount() {
+    console.log(this.props, 'props');
+  }
 
-  onOk = () => {
-    console.log('onOK');
+  onChange = (val: any, dataString: string) => {
+    const { onChange } = this.props;
+    onChange(dataString);
   };
 
   render() {
-    return <DatePicker showTime placeholder="请选择时间" onChange={onChange} onOk={onOk} />;
+    return (
+      <DatePicker
+        showTime
+        placeholder="请选择时间"
+        onChange={this.onChange}
+        format="YYYY-MM-DD HH:mm:ss"
+      />
+    );
   }
 }
 

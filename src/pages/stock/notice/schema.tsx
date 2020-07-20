@@ -1,6 +1,7 @@
 import React from 'react';
 import { Input } from 'antd';
 import { IFormSchema } from 'utopa-antd-pro/dist/components/FormList';
+import DatePicker from '@/components/DatePicker';
 
 export const searchSchema: IFormSchema[] = [
   {
@@ -21,7 +22,7 @@ export const searchSchema: IFormSchema[] = [
   {
     label: '实际到货日期',
     field: 'name',
-    component: <Input placeholder="请输入" />,
+    component: <DatePicker />,
   },
   {
     label: '货品名称',

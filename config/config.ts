@@ -211,7 +211,7 @@ export default {
                 },
                 {
                   name: '调拨单',
-                  icon: 'smile',
+                  icon: 'switcher',
                   path: '/stock/requisition',
                   component: './stock/requisition',
                 },
