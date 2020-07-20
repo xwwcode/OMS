@@ -34,7 +34,14 @@ const columns = [
   },
 ];
 
-const NoticeGoods: React.FC<IProps> = ({ dataScouce, searchData, loading, visable, onCancel }) => {
+const NoticeGoods: React.FC<IProps> = ({
+  dataScouce,
+  searchData,
+  loading,
+  visable,
+  dispatch = () => {},
+  onCancel,
+}) => {
   const onFetch = (data: any) => dispatch({ type: ACTIONS.FETCH_LIST, payload: data });
   const { pagination, onAutoSearch } = useConnectTable(searchData, {
     onFetch,
@@ -64,7 +71,7 @@ const NoticeGoods: React.FC<IProps> = ({ dataScouce, searchData, loading, visabl
       onCancel={handleCancel}
     >
       <StandardTable
-        actions={<Button.Group size="small"></Button.Group>}
+        actions={<Button.Group size="small" />}
         searchContent={<SearchForm onSearch={onAutoSearch} formSchema={goodsSchema} />}
         columns={columns}
         dataSource={dataScouce}

@@ -7,12 +7,12 @@ import { ISearchData, ConnectPageState } from './model';
 import { goodsSchema } from './schema';
 
 const ACTIONS = {
-  FETCH_LIST: 'delyvery/fetchList',
-  FETCH_ITEM: 'delyvery/fetchItem',
-  ADD_ITEM: 'delyvery/addItem',
-  UPDATE_ITEM: 'delyvery/updateItem',
-  DELETE_ITEM: 'delyvery/deleteItem',
-  SWITCH_STATUS: 'delyvery/switchStatus',
+  FETCH_LIST: 'orderAndlist/fetchList',
+  FETCH_ITEM: 'orderAndlist/fetchItem',
+  ADD_ITEM: 'orderAndlist/addItem',
+  UPDATE_ITEM: 'orderAndlist/updateItem',
+  DELETE_ITEM: 'orderAndlist/deleteItem',
+  SWITCH_STATUS: 'orderAndlist/switchStatus',
 };
 
 interface IProps extends ConnectProps {
@@ -34,13 +34,13 @@ const columns = [
   },
 ];
 
-const DelyveryGoodsDetail: React.FC<IProps> = ({
+const OrderGoodsDetail: React.FC<IProps> = ({
   dataScouce,
   searchData,
   loading,
   visable,
-  dispatch = () => {},
   onCancel,
+  dispatch = () => {},
 }) => {
   const onFetch = (data: any) => dispatch({ type: ACTIONS.FETCH_LIST, payload: data });
   const { pagination, onAutoSearch } = useConnectTable(searchData, {
@@ -91,8 +91,8 @@ const DelyveryGoodsDetail: React.FC<IProps> = ({
   );
 };
 
-export default connect(({ delyvery, loading }: ConnectPageState) => ({
-  dataScouce: delyvery.goodsList,
-  searchData: delyvery.searchGoodsData,
+export default connect(({ orderAndlist, loading }: ConnectPageState) => ({
+  dataScouce: orderAndlist.goodsList,
+  searchData: orderAndlist.searchGoodsData,
   loading: loading.effects[ACTIONS.FETCH_LIST],
-}))(DelyveryGoodsDetail);
+}))(OrderGoodsDetail);

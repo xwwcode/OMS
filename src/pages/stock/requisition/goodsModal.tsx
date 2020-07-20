@@ -39,6 +39,7 @@ const RequisitionGoods: React.FC<IProps> = ({
   searchData,
   loading,
   visable,
+  dispatch = () => {},
   onCancel,
 }) => {
   const onFetch = (data: any) => dispatch({ type: ACTIONS.FETCH_LIST, payload: data });
@@ -70,7 +71,7 @@ const RequisitionGoods: React.FC<IProps> = ({
       onCancel={handleCancel}
     >
       <StandardTable
-        actions={<Button.Group size="small"></Button.Group>}
+        actions={<Button.Group size="small" />}
         searchContent={<SearchForm onSearch={onAutoSearch} formSchema={goodsSchema} />}
         columns={columns}
         dataSource={dataScouce}

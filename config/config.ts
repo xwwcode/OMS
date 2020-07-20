@@ -227,6 +227,21 @@ export default {
               name: '订单管理',
               icon: 'switcher',
               path: '/order',
+              routes: [
+                {
+                  name: '订单列表',
+                  icon: 'switcher',
+                  path: '/order/list',
+                  component: './order/list',
+                },
+                {
+                  name: '订单详情',
+                  icon: 'switcher',
+                  path: '/order/list/detail',
+                  component: './order/list/detail',
+                  hideInMenu: true,
+                },
+              ],
             }, // {
             //   name: '基础资料',
             //   icon: 'switcher',
