@@ -55,7 +55,7 @@ export default {
   menu: {
     locale: true,
   },
-  title: 'UTOPA鉴权中心',
+  title: '',
   pwa: false,
   iconfontUrl: '',
 } as DefaultSettings;

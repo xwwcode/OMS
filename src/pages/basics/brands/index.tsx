@@ -8,12 +8,12 @@ import { ISearchData, ConnectPageState } from './model';
 import { searchSchema, editSchema } from './schema';
 
 const ACTIONS = {
-  FETCH_LIST: 'store/fetchList',
-  FETCH_ITEM: 'store/fetchItem',
-  ADD_ITEM: 'store/addItem',
-  UPDATE_ITEM: 'store/updateItem',
-  DELETE_ITEM: 'store/deleteItem',
-  SWITCH_STATUS: 'store/switchStatus',
+  FETCH_LIST: 'brands/fetchList',
+  FETCH_ITEM: 'brands/fetchItem',
+  ADD_ITEM: 'brands/addItem',
+  UPDATE_ITEM: 'brands/updateItem',
+  DELETE_ITEM: 'brands/deleteItem',
+  SWITCH_STATUS: 'brands/switchStatus',
 };
 
 interface IProps extends ConnectProps {
@@ -24,38 +24,22 @@ interface IProps extends ConnectProps {
 
 const columns = [
   {
-    title: '门店名称',
+    title: '品牌名称',
     dataIndex: 'name',
-    // width: 130,
+    width: 130,
   },
   {
-    title: '门店简称',
-    dataIndex: 'name',
-    // width: 130,
+    title: '品牌简称',
+    dataIndex: 'useName',
+    width: 130,
   },
   {
-    title: '店铺地址',
-    dataIndex: 'name',
-    width: 400,
-  },
-  {
-    title: '所在平台',
-    dataIndex: 'name',
-    // width: 130,
-  },
-  {
-    title: '平台授权状态',
-    dataIndex: 'name',
-    // width: 130,
-  },
-  {
-    title: '门店负责人',
-    dataIndex: 'name',
-    // width: 130,
+    title: '备注',
+    dataIndex: 'note',
   },
 ];
 
-const Store: React.FC<IProps> = ({ dataScouce, loading, dispatch = () => {}, searchData }) => {
+const Brands: React.FC<IProps> = ({ dataScouce, loading, dispatch = () => {}, searchData }) => {
   const onFetch = (data: any) => dispatch({ type: ACTIONS.FETCH_LIST, payload: data });
 
   // useConnectTable连接搜索和分页
@@ -70,7 +54,6 @@ const Store: React.FC<IProps> = ({ dataScouce, loading, dispatch = () => {}, sea
   const onAdd = () => {
     visibleFormModal(editSchema(), {
       title: '新增',
-      width: 800,
       onOk: async (data: any) => {
         await dispatch({
           type: ACTIONS.ADD_ITEM,
@@ -87,11 +70,10 @@ const Store: React.FC<IProps> = ({ dataScouce, loading, dispatch = () => {}, sea
   const onUpdate = (item: any) => {
     visibleFormModal(editSchema(item), {
       title: '修改',
-      width: 800,
       onOk: async (data: any) => {
         await dispatch({
           type: ACTIONS.UPDATE_ITEM,
-          payload: Object.assign({}, item, data),
+          payload: { ...item, ...data },
         });
         onAutoSearch();
       },
@@ -146,8 +128,8 @@ const Store: React.FC<IProps> = ({ dataScouce, loading, dispatch = () => {}, sea
   );
 };
 
-export default connect(({ store, loading }: ConnectPageState) => ({
-  dataScouce: store.list,
-  searchData: store.searchData,
+export default connect(({ brands, loading }: ConnectPageState) => ({
+  dataScouce: brands.list,
+  searchData: brands.searchData,
   loading: loading.effects[ACTIONS.FETCH_LIST],
-}))(Store);
+}))(Brands);

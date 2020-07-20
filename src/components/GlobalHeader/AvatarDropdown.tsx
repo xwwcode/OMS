@@ -41,9 +41,7 @@ class AvatarDropdown extends React.Component<GlobalHeaderRightProps> {
         onOk: payload =>
           dispatch({
             type: 'login/modifyPassword',
-            payload: Object.assign({}, payload, {
-              userId: storage.getItem(STORAGE_KEY.TOKEN).userId,
-            }),
+            payload: { ...payload, userId: storage.getItem(STORAGE_KEY.TOKEN).userId },
           }),
       });
     }

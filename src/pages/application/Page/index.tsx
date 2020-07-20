@@ -112,7 +112,7 @@ const Page: React.FC<IProps> = ({ appList, loading, dispatch = () => {}, searchD
       onOk: async (data: any) => {
         await dispatch({
           type: ACTIONS.UPDATE_ITEM,
-          payload: Object.assign({}, item, data),
+          payload: { ...item, ...data },
         });
         onAutoSearch();
       },

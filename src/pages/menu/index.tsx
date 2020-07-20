@@ -106,7 +106,7 @@ const Menu: React.FC<IProps> = ({
    */
   const onAdd = (item: any) => {
     if (item.appId) {
-      const param = Object.assign({}, item);
+      const param = { ...item };
       param.parentMenuName = item.name;
       param.name = '';
       setFormMessage(param);
@@ -149,7 +149,7 @@ const Menu: React.FC<IProps> = ({
       params.parentMenuId = formMessage.id;
       await dispatch({
         type: ACTIONS.ADD_ITEM,
-        payload: Object.assign({}, params),
+        payload: { ...params },
       });
       onAutoSearch();
     };
@@ -158,12 +158,16 @@ const Menu: React.FC<IProps> = ({
       params.parentMenuId = formMessage.parentMenuId;
       await dispatch({
         type: ACTIONS.UPDATE_ITEM,
-        payload: Object.assign({}, params),
+        payload: { ...params },
       });
       onAutoSearch();
     };
     // eslint-disable-next-line no-unused-expressions
-    addOrEdit ? add() : edit();
+    if (addOrEdit === true) {
+      add();
+    } else {
+      edit();
+    }
     setFormFalg(false);
   };
 

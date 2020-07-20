@@ -92,7 +92,7 @@ const Page: React.FC<IProps> = ({ customerList, loading, dispatch = () => {}, se
       onOk: async (data: any) => {
         await dispatch({
           type: ACTIONS.UPDATE_ITEM,
-          payload: Object.assign({}, item, data, { isEdit: true }),
+          payload: { ...item, ...data, isEdit: true },
         });
         onAutoSearch();
       },

@@ -37,17 +37,14 @@ class PerModal extends React.PureComponent<IProps> {
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
         values.keys.forEach((item, index) => {
-          const param = Object.assign(
-            {},
-            {
-              customerId: values.customerId,
-              appId: values.appId,
-              remark: values[`remark${item}`],
-              name: values[`name${item}`],
-              permissionKey: values[`permissionKey${item}`],
-              parentPermissionId: paramMsg.id || undefined,
-            },
-          );
+          const param = {
+            customerId: values.customerId,
+            appId: values.appId,
+            remark: values[`remark${item}`],
+            name: values[`name${item}`],
+            permissionKey: values[`permissionKey${item}`],
+            parentPermissionId: paramMsg.id || undefined,
+          };
           if (dispatch) {
             dispatch({
               type: ACTIONS.ADD_ITEM,
@@ -113,17 +110,14 @@ class PerModal extends React.PureComponent<IProps> {
       ['customerId', 'appId', `remark${key}`, `name${key}`, `permissionKey${key}`],
       (err, values) => {
         if (!err) {
-          const param = Object.assign(
-            {},
-            {
-              customerId: values.customerId,
-              appId: values.appId,
-              remark: values[`remark${key}`],
-              name: values[`name${key}`],
-              permissionKey: values[`permissionKey${key}`],
-              parentPermissionId: paramMsg.id || undefined,
-            },
-          );
+          const param = {
+            customerId: values.customerId,
+            appId: values.appId,
+            remark: values[`remark${key}`],
+            name: values[`name${key}`],
+            permissionKey: values[`permissionKey${key}`],
+            parentPermissionId: paramMsg.id || undefined,
+          };
           if (dispatch) {
             dispatch({
               type: ACTIONS.ADD_ITEM,

@@ -8,12 +8,12 @@ import { ISearchData, ConnectPageState } from './model';
 import { searchSchema, editSchema } from './schema';
 
 const ACTIONS = {
-  FETCH_LIST: 'delyvery/fetchList',
-  FETCH_ITEM: 'delyvery/fetchItem',
-  ADD_ITEM: 'delyvery/addItem',
-  UPDATE_ITEM: 'delyvery/updateItem',
-  DELETE_ITEM: 'delyvery/deleteItem',
-  SWITCH_STATUS: 'delyvery/switchStatus',
+  FETCH_LIST: 'warehouse/fetchList',
+  FETCH_ITEM: 'warehouse/fetchItem',
+  ADD_ITEM: 'warehouse/addItem',
+  UPDATE_ITEM: 'warehouse/updateItem',
+  DELETE_ITEM: 'warehouse/deleteItem',
+  SWITCH_STATUS: 'warehouse/switchStatus',
 };
 
 interface IProps extends ConnectProps {
@@ -24,7 +24,47 @@ interface IProps extends ConnectProps {
 
 const columns = [
   {
-    title: '名称',
+    title: '仓库代码',
+    dataIndex: 'name',
+    // width: 130,
+  },
+  {
+    title: '仓库名称',
+    dataIndex: 'name',
+    // width: 130,
+  },
+  {
+    title: '仓库类型',
+    dataIndex: 'name',
+    // width: 130,
+  },
+  {
+    title: '处理能力(单/天)',
+    dataIndex: 'name',
+    // width: 130,
+  },
+  {
+    title: '联系人',
+    dataIndex: 'name',
+    // width: 130,
+  },
+  {
+    title: '电话',
+    dataIndex: 'name',
+    // width: 130,
+  },
+  {
+    title: '地址',
+    dataIndex: 'name',
+    // width: 130,
+  },
+  {
+    title: '状态',
+    dataIndex: 'name',
+    // width: 130,
+  },
+  {
+    title: '，默认仓',
     dataIndex: 'name',
     // width: 130,
   },
@@ -32,7 +72,7 @@ const columns = [
   { title: '创建时间', dataIndex: 'creationTime', width: 170 },
 ];
 
-const Delyvery: React.FC<IProps> = ({ dataScouce, loading, dispatch = () => {}, searchData }) => {
+const Warehouse: React.FC<IProps> = ({ dataScouce, loading, dispatch = () => {}, searchData }) => {
   const onFetch = (data: any) => dispatch({ type: ACTIONS.FETCH_LIST, payload: data });
 
   // useConnectTable连接搜索和分页
@@ -47,6 +87,7 @@ const Delyvery: React.FC<IProps> = ({ dataScouce, loading, dispatch = () => {}, 
   const onAdd = () => {
     visibleFormModal(editSchema(), {
       title: '新增',
+      width: 800,
       onOk: async (data: any) => {
         await dispatch({
           type: ACTIONS.ADD_ITEM,
@@ -63,10 +104,11 @@ const Delyvery: React.FC<IProps> = ({ dataScouce, loading, dispatch = () => {}, 
   const onUpdate = (item: any) => {
     visibleFormModal(editSchema(item), {
       title: '修改',
+      width: 800,
       onOk: async (data: any) => {
         await dispatch({
           type: ACTIONS.UPDATE_ITEM,
-          payload: Object.assign({}, item, data),
+          payload: { ...item, ...data },
         });
         onAutoSearch();
       },
@@ -121,8 +163,8 @@ const Delyvery: React.FC<IProps> = ({ dataScouce, loading, dispatch = () => {}, 
   );
 };
 
-export default connect(({ delyvery, loading }: ConnectPageState) => ({
-  dataScouce: delyvery.list,
-  searchData: delyvery.searchData,
+export default connect(({ warehouse, loading }: ConnectPageState) => ({
+  dataScouce: warehouse.list,
+  searchData: warehouse.searchData,
   loading: loading.effects[ACTIONS.FETCH_LIST],
-}))(Delyvery);
+}))(Warehouse);

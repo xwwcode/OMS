@@ -89,16 +89,18 @@ const Notice: React.FC<IProps> = ({ dataScouce, loading, dispatch = () => {}, se
    * 新增
    */
   const onAdd = () => {
-    visibleFormModal(editSchema(), {
-      title: '新增',
-      onOk: async (data: any) => {
-        await dispatch({
-          type: ACTIONS.ADD_ITEM,
-          payload: data,
-        });
-        onAutoSearch();
-      },
-    });
+    /* eslint no-underscore-dangle: 0 */
+    window.g_app._store.dispatch(routerRedux.push('/stock/notice/detail'));
+    // visibleFormModal(editSchema(), {
+    //   title: '新增',
+    //   onOk: async (data: any) => {
+    //     await dispatch({
+    //       type: ACTIONS.ADD_ITEM,
+    //       payload: data,
+    //     });
+    //     onAutoSearch();
+    //   },
+    // });
   };
 
   /**
@@ -107,7 +109,7 @@ const Notice: React.FC<IProps> = ({ dataScouce, loading, dispatch = () => {}, se
   const onUpdate = (item: any) => {
     console.log(item, '=====item====');
     /* eslint no-underscore-dangle: 0 */
-    window.g_app._store.dispatch(routerRedux.push('/notice/detail'));
+    window.g_app._store.dispatch(routerRedux.push('/stock/notice/detail'));
     // visibleFormModal(editSchema(item), {
     //   title: '修改',
     //   onOk: async (data: any) => {
@@ -150,13 +152,13 @@ const Notice: React.FC<IProps> = ({ dataScouce, loading, dispatch = () => {}, se
   return (
     <PageHeaderWrapper title={false}>
       <StandardTable
-        // actions={
-        //   <Button.Group size="small">
-        //     <Button type="primary" onClick={onAdd}>
-        //       新增到货通知单
-        //     </Button>
-        //   </Button.Group>
-        // }
+        actions={
+          <Button.Group size="small">
+            <Button type="primary" onClick={onAdd}>
+              新增到货通知单
+            </Button>
+          </Button.Group>
+        }
         searchContent={<SearchForm onSearch={onAutoSearch} formSchema={searchSchema} />}
         columns={columns}
         dataSource={dataScouce}

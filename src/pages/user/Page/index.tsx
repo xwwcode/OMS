@@ -66,7 +66,7 @@ const Page: React.FC<IProps> = ({ dataScouce, loading, dispatch = () => {}, sear
       onOk: async (data: any) => {
         await dispatch({
           type: ACTIONS.UPDATE_ITEM,
-          payload: Object.assign({}, item, data),
+          payload: { ...item, ...data },
         });
         onAutoSearch();
       },

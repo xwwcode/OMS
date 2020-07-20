@@ -4,37 +4,17 @@ import { IFormSchema } from 'utopa-antd-pro/dist/components/FormList';
 
 export const searchSchema: IFormSchema[] = [
   {
-    label: '到货通知单ID',
+    label: '货品SKU条码',
     field: 'name',
     component: <Input placeholder="请输入" />,
   },
   {
-    label: '供应商',
+    label: '货品SKU编码',
     field: 'name',
     component: <Input placeholder="请输入" />,
   },
   {
-    label: '收货仓库',
-    field: 'name',
-    component: <Input placeholder="请输入" />,
-  },
-  {
-    label: '实际到货日期',
-    field: 'name',
-    component: <Input placeholder="请输入" />,
-  },
-  {
-    label: '货品名称',
-    field: 'name',
-    component: <Input placeholder="请输入" />,
-  },
-  {
-    label: '差异情况',
-    field: 'name',
-    component: <Input placeholder="请输入" />,
-  },
-  {
-    label: '状态',
+    label: '货品SKU名称',
     field: 'name',
     component: <Input placeholder="请输入" />,
   },
@@ -42,27 +22,20 @@ export const searchSchema: IFormSchema[] = [
 
 export const detailSchema: IFormSchema[] = [
   {
-    label: '到货通知单ID',
+    label: '货品SKU条码',
     field: 'name',
-    component: <Input placeholder="请输入" disabled />,
+    component: <Input placeholder="请输入" />,
   },
+];
+
+export const goodsSchema: IFormSchema[] = [
   {
-    label: '收货仓库',
+    label: '货品名称',
     field: 'name',
     component: <Input placeholder="请输入" />,
   },
   {
-    label: '供应商',
-    field: 'name',
-    component: <Input placeholder="请输入" />,
-  },
-  {
-    label: '预计到货日期',
-    field: 'name',
-    component: <Input placeholder="请输入" />,
-  },
-  {
-    label: '备注',
+    label: '货品编码',
     field: 'name',
     component: <Input placeholder="请输入" />,
   },

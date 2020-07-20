@@ -32,12 +32,7 @@ const columns = [
   { title: '创建时间', dataIndex: 'creationTime', width: 170 },
 ];
 
-const Test1: React.FC<IProps> = ({
-  dataScouce,
-  loading,
-  dispatch = () => {},
-  searchData,
-}) => {
+const Test1: React.FC<IProps> = ({ dataScouce, loading, dispatch = () => {}, searchData }) => {
   const onFetch = (data: any) => dispatch({ type: ACTIONS.FETCH_LIST, payload: data });
 
   // useConnectTable连接搜索和分页
@@ -71,7 +66,7 @@ const Test1: React.FC<IProps> = ({
       onOk: async (data: any) => {
         await dispatch({
           type: ACTIONS.UPDATE_ITEM,
-          payload: Object.assign({}, item, data),
+          payload: { ...item, ...data },
         });
         onAutoSearch();
       },

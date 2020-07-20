@@ -113,9 +113,7 @@ const Page: React.FC<IProps> = ({
       onOk: async (data: any) => {
         await dispatch({
           type: ACTIONS.ADD_ITEM,
-          payload: Object.assign({}, data, {
-            parentUserId: storage.getItem(STORAGE_KEY.USER).userId,
-          }),
+          payload: { ...data, parentUserId: storage.getItem(STORAGE_KEY.USER).userId },
         });
         onAutoSearch();
       },
@@ -131,9 +129,7 @@ const Page: React.FC<IProps> = ({
       onOk: async (data: any) => {
         await dispatch({
           type: ACTIONS.UPDATE_ITEM,
-          payload: Object.assign({}, item, data, {
-            parentUserId: storage.getItem(STORAGE_KEY.USER).userId,
-          }),
+          payload: { ...item, ...data, parentUserId: storage.getItem(STORAGE_KEY.USER).userId },
         });
         onAutoSearch();
       },

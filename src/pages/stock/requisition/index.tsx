@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button } from 'antd';
 import { connect } from 'dva';
+import { routerRedux } from 'dva/router';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import { SearchForm, StandardTable, useConnectTable, visibleFormModal } from 'utopa-antd-pro';
 import { ConnectProps } from '@/models/connect';
@@ -8,12 +9,12 @@ import { ISearchData, ConnectPageState } from './model';
 import { searchSchema, editSchema } from './schema';
 
 const ACTIONS = {
-  FETCH_LIST: 'brands/fetchList',
-  FETCH_ITEM: 'brands/fetchItem',
-  ADD_ITEM: 'brands/addItem',
-  UPDATE_ITEM: 'brands/updateItem',
-  DELETE_ITEM: 'brands/deleteItem',
-  SWITCH_STATUS: 'brands/switchStatus',
+  FETCH_LIST: 'stockAndrequisition/fetchList',
+  FETCH_ITEM: 'stockAndrequisition/fetchItem',
+  ADD_ITEM: 'stockAndrequisition/addItem',
+  UPDATE_ITEM: 'stockAndrequisition/updateItem',
+  DELETE_ITEM: 'stockAndrequisition/deleteItem',
+  SWITCH_STATUS: 'stockAndrequisition/switchStatus',
 };
 
 interface IProps extends ConnectProps {
@@ -24,22 +25,38 @@ interface IProps extends ConnectProps {
 
 const columns = [
   {
-    title: '品牌名称',
+    title: '调拔单号',
     dataIndex: 'name',
-    width: 130,
+    // width: 130,
   },
   {
-    title: '品牌简称',
-    dataIndex: 'useName',
-    width: 130,
+    title: '日期',
+    dataIndex: 'name',
+    // width: 130,
   },
   {
-    title: '备注',
-    dataIndex: 'note',
+    title: '发出仓库',
+    dataIndex: 'name',
+    // width: 130,
+  },
+  {
+    title: '接收仓库',
+    dataIndex: 'name',
+    // width: 130,
+  },
+  {
+    title: '操作人',
+    dataIndex: 'name',
+    // width: 130,
   },
 ];
 
-const Brands: React.FC<IProps> = ({ dataScouce, loading, dispatch = () => {}, searchData }) => {
+const Requisition: React.FC<IProps> = ({
+  dataScouce,
+  loading,
+  dispatch = () => {},
+  searchData,
+}) => {
   const onFetch = (data: any) => dispatch({ type: ACTIONS.FETCH_LIST, payload: data });
 
   // useConnectTable连接搜索和分页
@@ -52,32 +69,36 @@ const Brands: React.FC<IProps> = ({ dataScouce, loading, dispatch = () => {}, se
    * 新增
    */
   const onAdd = () => {
-    visibleFormModal(editSchema(), {
-      title: '新增',
-      onOk: async (data: any) => {
-        await dispatch({
-          type: ACTIONS.ADD_ITEM,
-          payload: data,
-        });
-        onAutoSearch();
-      },
-    });
+    /* eslint no-underscore-dangle: 0 */
+    window.g_app._store.dispatch(routerRedux.push('/stock/requisition/detail'));
+    // visibleFormModal(editSchema(), {
+    //   title: '新增',
+    //   onOk: async (data: any) => {
+    //     await dispatch({
+    //       type: ACTIONS.ADD_ITEM,
+    //       payload: data,
+    //     });
+    //     onAutoSearch();
+    //   },
+    // });
   };
 
   /**
    * 修改
    */
   const onUpdate = (item: any) => {
-    visibleFormModal(editSchema(item), {
-      title: '修改',
-      onOk: async (data: any) => {
-        await dispatch({
-          type: ACTIONS.UPDATE_ITEM,
-          payload: Object.assign({}, item, data),
-        });
-        onAutoSearch();
-      },
-    });
+    /* eslint no-underscore-dangle: 0 */
+    window.g_app._store.dispatch(routerRedux.push('/stock/requisition/detail'));
+    // visibleFormModal(editSchema(item), {
+    //   title: '修改',
+    //   onOk: async (data: any) => {
+    //     await dispatch({
+    //       type: ACTIONS.UPDATE_ITEM,
+    //       payload: Object.assign({}, item, data),
+    //     });
+    //     onAutoSearch();
+    //   },
+    // });
   };
 
   /**
@@ -113,7 +134,7 @@ const Brands: React.FC<IProps> = ({ dataScouce, loading, dispatch = () => {}, se
         actions={
           <Button.Group size="small">
             <Button type="primary" onClick={onAdd}>
-              新增
+              新增调拨单
             </Button>
           </Button.Group>
         }
@@ -128,8 +149,8 @@ const Brands: React.FC<IProps> = ({ dataScouce, loading, dispatch = () => {}, se
   );
 };
 
-export default connect(({ brands, loading }: ConnectPageState) => ({
-  dataScouce: brands.list,
-  searchData: brands.searchData,
+export default connect(({ stockAndrequisition, loading }: ConnectPageState) => ({
+  dataScouce: stockAndrequisition.list,
+  searchData: stockAndrequisition.searchData,
   loading: loading.effects[ACTIONS.FETCH_LIST],
-}))(Brands);
+}))(Requisition);

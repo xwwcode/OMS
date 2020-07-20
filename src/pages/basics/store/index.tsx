@@ -8,12 +8,12 @@ import { ISearchData, ConnectPageState } from './model';
 import { searchSchema, editSchema } from './schema';
 
 const ACTIONS = {
-  FETCH_LIST: 'supplier/fetchList',
-  FETCH_ITEM: 'supplier/fetchItem',
-  ADD_ITEM: 'supplier/addItem',
-  UPDATE_ITEM: 'supplier/updateItem',
-  DELETE_ITEM: 'supplier/deleteItem',
-  SWITCH_STATUS: 'supplier/switchStatus',
+  FETCH_LIST: 'store/fetchList',
+  FETCH_ITEM: 'store/fetchItem',
+  ADD_ITEM: 'store/addItem',
+  UPDATE_ITEM: 'store/updateItem',
+  DELETE_ITEM: 'store/deleteItem',
+  SWITCH_STATUS: 'store/switchStatus',
 };
 
 interface IProps extends ConnectProps {
@@ -24,48 +24,38 @@ interface IProps extends ConnectProps {
 
 const columns = [
   {
-    title: '名称',
+    title: '门店名称',
     dataIndex: 'name',
     // width: 130,
   },
   {
-    title: '简称',
+    title: '门店简称',
     dataIndex: 'name',
     // width: 130,
   },
   {
-    title: '联系人',
+    title: '店铺地址',
+    dataIndex: 'name',
+    width: 400,
+  },
+  {
+    title: '所在平台',
     dataIndex: 'name',
     // width: 130,
   },
   {
-    title: '手机',
+    title: '平台授权状态',
     dataIndex: 'name',
     // width: 130,
   },
   {
-    title: '固话',
-    dataIndex: 'name',
-    // width: 130,
-  },
-  {
-    title: '传真',
-    dataIndex: 'name',
-    // width: 130,
-  },
-  {
-    title: '电子邮件',
-    dataIndex: 'name',
-    // width: 130,
-  },
-  {
-    title: '状态',
+    title: '门店负责人',
     dataIndex: 'name',
     // width: 130,
   },
 ];
 
-const Supplier: React.FC<IProps> = ({ dataScouce, loading, dispatch = () => {}, searchData }) => {
+const Store: React.FC<IProps> = ({ dataScouce, loading, dispatch = () => {}, searchData }) => {
   const onFetch = (data: any) => dispatch({ type: ACTIONS.FETCH_LIST, payload: data });
 
   // useConnectTable连接搜索和分页
@@ -101,7 +91,7 @@ const Supplier: React.FC<IProps> = ({ dataScouce, loading, dispatch = () => {}, 
       onOk: async (data: any) => {
         await dispatch({
           type: ACTIONS.UPDATE_ITEM,
-          payload: Object.assign({}, item, data),
+          payload: { ...item, ...data },
         });
         onAutoSearch();
       },
@@ -156,8 +146,8 @@ const Supplier: React.FC<IProps> = ({ dataScouce, loading, dispatch = () => {}, 
   );
 };
 
-export default connect(({ supplier, loading }: ConnectPageState) => ({
-  dataScouce: supplier.list,
-  searchData: supplier.searchData,
+export default connect(({ store, loading }: ConnectPageState) => ({
+  dataScouce: store.list,
+  searchData: store.searchData,
   loading: loading.effects[ACTIONS.FETCH_LIST],
-}))(Supplier);
+}))(Store);

@@ -8,12 +8,12 @@ import { ISearchData, ConnectPageState } from './model';
 import { searchSchema, editSchema } from './schema';
 
 const ACTIONS = {
-  FETCH_LIST: 'warehouse/fetchList',
-  FETCH_ITEM: 'warehouse/fetchItem',
-  ADD_ITEM: 'warehouse/addItem',
-  UPDATE_ITEM: 'warehouse/updateItem',
-  DELETE_ITEM: 'warehouse/deleteItem',
-  SWITCH_STATUS: 'warehouse/switchStatus',
+  FETCH_LIST: 'supplier/fetchList',
+  FETCH_ITEM: 'supplier/fetchItem',
+  ADD_ITEM: 'supplier/addItem',
+  UPDATE_ITEM: 'supplier/updateItem',
+  DELETE_ITEM: 'supplier/deleteItem',
+  SWITCH_STATUS: 'supplier/switchStatus',
 };
 
 interface IProps extends ConnectProps {
@@ -24,22 +24,12 @@ interface IProps extends ConnectProps {
 
 const columns = [
   {
-    title: '仓库代码',
+    title: '名称',
     dataIndex: 'name',
     // width: 130,
   },
   {
-    title: '仓库名称',
-    dataIndex: 'name',
-    // width: 130,
-  },
-  {
-    title: '仓库类型',
-    dataIndex: 'name',
-    // width: 130,
-  },
-  {
-    title: '处理能力(单/天)',
+    title: '简称',
     dataIndex: 'name',
     // width: 130,
   },
@@ -49,12 +39,22 @@ const columns = [
     // width: 130,
   },
   {
-    title: '电话',
+    title: '手机',
     dataIndex: 'name',
     // width: 130,
   },
   {
-    title: '地址',
+    title: '固话',
+    dataIndex: 'name',
+    // width: 130,
+  },
+  {
+    title: '传真',
+    dataIndex: 'name',
+    // width: 130,
+  },
+  {
+    title: '电子邮件',
     dataIndex: 'name',
     // width: 130,
   },
@@ -63,16 +63,9 @@ const columns = [
     dataIndex: 'name',
     // width: 130,
   },
-  {
-    title: '，默认仓',
-    dataIndex: 'name',
-    // width: 130,
-  },
-
-  { title: '创建时间', dataIndex: 'creationTime', width: 170 },
 ];
 
-const Warehouse: React.FC<IProps> = ({ dataScouce, loading, dispatch = () => {}, searchData }) => {
+const Supplier: React.FC<IProps> = ({ dataScouce, loading, dispatch = () => {}, searchData }) => {
   const onFetch = (data: any) => dispatch({ type: ACTIONS.FETCH_LIST, payload: data });
 
   // useConnectTable连接搜索和分页
@@ -108,7 +101,7 @@ const Warehouse: React.FC<IProps> = ({ dataScouce, loading, dispatch = () => {},
       onOk: async (data: any) => {
         await dispatch({
           type: ACTIONS.UPDATE_ITEM,
-          payload: Object.assign({}, item, data),
+          payload: { ...item, ...data },
         });
         onAutoSearch();
       },
@@ -163,8 +156,8 @@ const Warehouse: React.FC<IProps> = ({ dataScouce, loading, dispatch = () => {},
   );
 };
 
-export default connect(({ warehouse, loading }: ConnectPageState) => ({
-  dataScouce: warehouse.list,
-  searchData: warehouse.searchData,
+export default connect(({ supplier, loading }: ConnectPageState) => ({
+  dataScouce: supplier.list,
+  searchData: supplier.searchData,
   loading: loading.effects[ACTIONS.FETCH_LIST],
-}))(Warehouse);
+}))(Supplier);

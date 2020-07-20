@@ -76,11 +76,12 @@ const Page: React.FC<IProps> = ({
     const { customerId, appId } = data;
     return dispatch({
       type: ACTIONS.FETCH_LIST,
-      payload: Object.assign({}, data, {
+      payload: {
+        ...data,
         mainUserId: storage.getItem(STORAGE_KEY.USER).userId,
         customerId: customerId || storage.getItem(STORAGE_KEY.USER).customerId,
         appId: appId || defaultAppVal,
-      }),
+      },
     });
   };
 
@@ -106,9 +107,7 @@ const Page: React.FC<IProps> = ({
       onOk: async (data: any) => {
         await dispatch({
           type: ACTIONS.ADD_ITEM,
-          payload: Object.assign({}, data, {
-            mainUserId: storage.getItem(STORAGE_KEY.USER).userId,
-          }),
+          payload: { ...data, mainUserId: storage.getItem(STORAGE_KEY.USER).userId },
         });
         onAutoSearch();
       },
@@ -124,9 +123,7 @@ const Page: React.FC<IProps> = ({
       onOk: async (data: any) => {
         await dispatch({
           type: ACTIONS.UPDATE_ITEM,
-          payload: Object.assign({}, item, data, {
-            mainUserId: storage.getItem(STORAGE_KEY.USER).userId,
-          }),
+          payload: { ...item, ...data, mainUserId: storage.getItem(STORAGE_KEY.USER).userId },
         });
         onAutoSearch();
       },

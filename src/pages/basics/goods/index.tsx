@@ -150,7 +150,7 @@ const Goods: React.FC<IProps> = ({ dataScouce, loading, dispatch = () => {}, sea
       )}
       <StandardTable
         actions={
-          <div>
+          <span>
             <Button.Group size="small">
               <Button type="primary" onClick={onAdd}>
                 新增
@@ -167,7 +167,7 @@ const Goods: React.FC<IProps> = ({ dataScouce, loading, dispatch = () => {}, sea
                 导入
               </Button>
             </Button.Group>
-          </div>
+          </span>
         }
         searchContent={<SearchForm onSearch={onAutoSearch} formSchema={searchSchema} />}
         columns={columns}
